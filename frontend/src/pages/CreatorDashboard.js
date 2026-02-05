@@ -153,21 +153,56 @@ const CreatorDashboard = ({ user, onLogout }) => {
                   <div>
                     <Label>Content Types</Label>
                     <div className="flex flex-wrap gap-2 mt-2">
-                      {['Vlog', 'Short Film', 'Tutorial', 'Review', 'Comedy'].map(type => (
-                        <button
-                          key={type}
-                          type="button"
-                          data-testid={`content-type-${type.toLowerCase()}`}
-                          onClick={() => toggleContentType(type)}
-                          className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                            contentTypes.includes(type)
-                              ? 'bg-purple-600 text-white'
-                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                          }`}
-                        >
-                          {type}
-                        </button>
-                      ))}
+                      <button
+                        type="button"
+                        data-testid="content-type-vlog"
+                        onClick={() => toggleContentType('Vlog')}
+                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                          contentTypes.includes('Vlog') ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
+                      >
+                        Vlog
+                      </button>
+                      <button
+                        type="button"
+                        data-testid="content-type-short film"
+                        onClick={() => toggleContentType('Short Film')}
+                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                          contentTypes.includes('Short Film') ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
+                      >
+                        Short Film
+                      </button>
+                      <button
+                        type="button"
+                        data-testid="content-type-tutorial"
+                        onClick={() => toggleContentType('Tutorial')}
+                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                          contentTypes.includes('Tutorial') ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
+                      >
+                        Tutorial
+                      </button>
+                      <button
+                        type="button"
+                        data-testid="content-type-review"
+                        onClick={() => toggleContentType('Review')}
+                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                          contentTypes.includes('Review') ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
+                      >
+                        Review
+                      </button>
+                      <button
+                        type="button"
+                        data-testid="content-type-comedy"
+                        onClick={() => toggleContentType('Comedy')}
+                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                          contentTypes.includes('Comedy') ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
+                      >
+                        Comedy
+                      </button>
                     </div>
                   </div>
                   <div>

@@ -1,0 +1,141 @@
+{
+  "design_system": {
+    "typography": {
+      "font_family": {
+        "heading": "Manrope, sans-serif",
+        "body": "Plus Jakarta Sans, sans-serif",
+        "mono": "JetBrains Mono, monospace"
+      },
+      "imports": [
+        "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap"
+      ],
+      "scale": {
+        "h1": "text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight",
+        "h2": "text-4xl md:text-5xl font-bold tracking-tight",
+        "h3": "text-2xl md:text-3xl font-semibold tracking-tight",
+        "body_lg": "text-lg md:text-xl leading-relaxed text-muted-foreground",
+        "body": "text-base leading-relaxed text-muted-foreground",
+        "caption": "text-sm font-medium tracking-wide uppercase text-muted-foreground"
+      }
+    },
+    "colors": {
+      "palette": {
+        "primary": {
+          "DEFAULT": "#0A0A0A",
+          "foreground": "#FFFFFF"
+        },
+        "secondary": {
+          "DEFAULT": "#F4F4F5",
+          "foreground": "#18181B"
+        },
+        "accent": {
+          "DEFAULT": "#007AFF",
+          "foreground": "#FFFFFF",
+          "purple": "#7928CA",
+          "pink": "#FF0080",
+          "teal": "#047857"
+        },
+        "background": "#FFFFFF",
+        "surface": "#FAFAFA",
+        "border": "#E4E4E7"
+      },
+      "gradients": {
+        "hero": "bg-gradient-to-br from-gray-50 to-gray-100",
+        "brand": "bg-gradient-to-r from-blue-600 to-violet-600",
+        "glow": "bg-gradient-to-tr from-blue-500/20 via-purple-500/20 to-pink-500/20"
+      }
+    },
+    "spacing": {
+      "container_padding": "px-6 md:px-12 lg:px-24",
+      "section_gap": "py-24 md:py-32",
+      "element_gap": "gap-6 md:gap-8"
+    },
+    "visual_enhancers": {
+      "radius": "rounded-xl",
+      "shadows": {
+        "card": "shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-shadow duration-300",
+        "float": "shadow-[0_20px_40px_-12px_rgba(0,0,0,0.12)]"
+      },
+      "glass": "bg-white/70 backdrop-blur-xl border border-white/20 shadow-sm",
+      "borders": "border border-border/60"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 rounded-full font-semibold transition-all active:scale-95",
+      "secondary": "bg-secondary text-secondary-foreground hover:bg-secondary/80 h-11 px-8 rounded-full font-medium transition-all active:scale-95",
+      "outline": "border-2 border-primary/10 hover:border-primary/30 bg-transparent text-primary h-11 px-8 rounded-full font-medium transition-all",
+      "ghost": "hover:bg-accent/10 text-foreground/80 hover:text-foreground h-10 px-4 rounded-lg font-medium transition-colors"
+    },
+    "cards": {
+      "base": "bg-white border border-border/50 rounded-2xl p-6 md:p-8",
+      "interactive": "group relative overflow-hidden bg-white border border-border/50 rounded-2xl p-6 md:p-8 hover:border-primary/20 transition-colors duration-300",
+      "feature": "bg-surface border-none rounded-3xl p-8 md:p-10"
+    },
+    "inputs": {
+      "base": "h-12 bg-white border-border/80 focus:border-primary focus:ring-2 focus:ring-primary/10 rounded-lg px-4 transition-all"
+    }
+  },
+  "layout_strategies": {
+    "landing_page": {
+      "hero": "grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[80vh]",
+      "features": "grid grid-cols-1 md:grid-cols-3 gap-8",
+      "bento_grid": "grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[minmax(180px,auto)]"
+    },
+    "dashboard": {
+      "wrapper": "flex h-screen bg-surface/50",
+      "sidebar": "w-64 border-r border-border bg-white/50 backdrop-blur-xl hidden md:flex flex-col",
+      "main": "flex-1 overflow-y-auto p-6 md:p-10",
+      "grid": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+    }
+  },
+  "assets": {
+    "images": {
+      "hero_bg": "https://images.unsplash.com/photo-1765046255500-ce203b84c307?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "startup_meeting": "https://images.unsplash.com/photo-1758873269317-51888e824b28?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "creator_vlog": "https://images.unsplash.com/photo-1758273706007-f1524d2d963f?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "creator_recording": "https://images.unsplash.com/photo-1758272421492-1efdb36a441f?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "office_glass": "https://images.unsplash.com/photo-1759884247142-028abd1e8ac2?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "abstract_grid": "https://images.unsplash.com/photo-1765046255517-412341954c4c?crop=entropy&cs=srgb&fm=jpg&q=85"
+    },
+    "icons": "lucide-react"
+  },
+  "motion": {
+    "page_transition": {
+      "initial": { "opacity": 0, "y": 20 },
+      "animate": { "opacity": 1, "y": 0 },
+      "exit": { "opacity": 0, "y": -20 },
+      "transition": { "duration": 0.4, "ease": "easeOut" }
+    },
+    "stagger": {
+      "container": {
+        "hidden": { "opacity": 0 },
+        "show": {
+          "opacity": 1,
+          "transition": { "staggerChildren": 0.1 }
+        }
+      },
+      "item": {
+        "hidden": { "opacity": 0, "y": 20 },
+        "show": { "opacity": 1, "y": 0 }
+      }
+    }
+  },
+  "instructions_to_main_agent": [
+    "1. THEME SETUP: Implement the 'Dual Persona' theme. Use the defined 'primary' (Black/White) for structure, but use 'accent.blue' for Startup dashboards and 'accent.purple'/'accent.pink' for Creator dashboards to visually distinguish the roles.",
+    "2. TYPOGRAPHY: Add the Google Fonts import to index.css immediately. Use 'Manrope' for all headings (h1-h3) and 'Plus Jakarta Sans' for body text. This is non-negotiable for the brand voice.",
+    "3. LAYOUT: For the Landing Page, use the 'Tetris' grid mode (asymmetric columns). Do NOT use standard 3-column grids. For Dashboards, use the 'Bento' grid (dense, gap-4/6).",
+    "4. COMPONENTS: Use Shadcn UI for complex interactions (Select, Dialog, Form) but style them using the 'visual_enhancers' rules (rounded-xl, specific shadows). Do NOT use default Shadcn styling.",
+    "5. IMAGES: Use the provided Unsplash URLs. Do not use placeholders. The 'hero_bg' should be used with a low opacity overlay in the AI Matching section.",
+    "6. MATCHING ENGINE: Visually represent the 'AI Match' using the 'Tracing Beam' effect or a glowing border around the matched creator cards.",
+    "7. GLASSMORPHISM: Apply the 'glass' class to the sticky navigation bar and any floating modal/overlay.",
+    "8. DATA-TESTID: Ensure every interactive element (buttons, inputs, cards) has a 'data-testid' attribute (e.g., 'login-btn', 'creator-card-1')."
+  ],
+  "universal_guidelines": [
+    "Avoid 'AI slop' - no generic centered layouts or default blue gradients.",
+    "Use 2-3x more spacing than typical (p-8, p-12).",
+    "Dark colors must be solid or subtle noise, NO dark gradients.",
+    "Micro-animations on all hover states are mandatory.",
+    "Never use 'transparent' backgrounds for dropdowns or headers with content underneath."
+  ]
+}

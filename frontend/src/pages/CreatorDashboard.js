@@ -300,9 +300,15 @@ const CreatorDashboard = ({ user, onLogout }) => {
                 <h2 className="text-3xl font-bold mb-2" style={{ fontFamily: 'Manrope, sans-serif' }}>{profile.creator_name}</h2>
                 <p className="text-gray-600 mb-4">{profile.bio}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {profile.content_types.map(type => (
-                    <Badge key={type} variant="secondary" className="bg-purple-100 text-purple-700">{type}</Badge>
-                  ))}
+                  {profile.content_types.length > 0 && profile.content_types[0] && (
+                    <Badge variant="secondary" className="bg-purple-100 text-purple-700">{profile.content_types[0]}</Badge>
+                  )}
+                  {profile.content_types.length > 1 && profile.content_types[1] && (
+                    <Badge variant="secondary" className="bg-purple-100 text-purple-700">{profile.content_types[1]}</Badge>
+                  )}
+                  {profile.content_types.length > 2 && profile.content_types[2] && (
+                    <Badge variant="secondary" className="bg-purple-100 text-purple-700">{profile.content_types[2]}</Badge>
+                  )}
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
                   {profile.platforms.includes('Instagram') && (

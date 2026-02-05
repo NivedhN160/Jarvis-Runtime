@@ -70,35 +70,26 @@ const CreatorDashboard = ({ user, onLogout }) => {
   };
 
   const toggleContentType = (type) => {
-    setFormData(prev => ({
-      ...prev,
-      content_types: prev.content_types.includes(type)
-        ? prev.content_types.filter(t => t !== type)
-        : [...prev.content_types, type]
-    }));
+    const newTypes = formData.content_types.includes(type)
+      ? formData.content_types.filter(t => t !== type)
+      : [...formData.content_types, type];
+    setFormData({ ...formData, content_types: newTypes });
   };
 
   const togglePlatform = (platform) => {
-    setFormData(prev => ({
-      ...prev,
-      platforms: prev.platforms.includes(platform)
-        ? prev.platforms.filter(p => p !== platform)
-        : [...prev.platforms, platform]
-    }));
+    const newPlatforms = formData.platforms.includes(platform)
+      ? formData.platforms.filter(p => p !== platform)
+      : [...formData.platforms, platform];
+    setFormData({ ...formData, platforms: newPlatforms });
   };
 
   const addPortfolioLink = () => {
-    setFormData(prev => ({
-      ...prev,
-      portfolio_links: [...prev.portfolio_links, '']
-    }));
+    setFormData({ ...formData, portfolio_links: [...formData.portfolio_links, ''] });
   };
 
   const updatePortfolioLink = (index, value) => {
-    setFormData(prev => ({
-      ...prev,
-      portfolio_links: prev.portfolio_links.map((link, i) => i === index ? value : link)
-    }));
+    const newLinks = formData.portfolio_links.map((link, i) => i === index ? value : link);
+    setFormData({ ...formData, portfolio_links: newLinks });
   };
 
   const handleLogout = () => {

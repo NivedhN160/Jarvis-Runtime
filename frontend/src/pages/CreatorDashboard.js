@@ -242,21 +242,32 @@ const CreatorDashboard = ({ user, onLogout }) => {
                   </div>
                   <div>
                     <Label>Portfolio Links</Label>
-                    {portfolioLinks.map((link, index) => (
+                    <Input
+                      data-testid="portfolio-link-0"
+                      type="url"
+                      placeholder="https://..."
+                      value={portfolioLinks[0] || ''}
+                      onChange={(e) => {
+                        const newLinks = [...portfolioLinks];
+                        newLinks[0] = e.target.value;
+                        setPortfolioLinks(newLinks);
+                      }}
+                      className="mt-2"
+                    />
+                    {portfolioLinks.length > 1 && (
                       <Input
-                        key={index}
-                        data-testid={`portfolio-link-${index}`}
+                        data-testid="portfolio-link-1"
                         type="url"
                         placeholder="https://..."
-                        value={link}
+                        value={portfolioLinks[1] || ''}
                         onChange={(e) => {
                           const newLinks = [...portfolioLinks];
-                          newLinks[index] = e.target.value;
+                          newLinks[1] = e.target.value;
                           setPortfolioLinks(newLinks);
                         }}
                         className="mt-2"
                       />
-                    ))}
+                    )}
                     <Button
                       type="button"
                       onClick={() => setPortfolioLinks([...portfolioLinks, ''])}

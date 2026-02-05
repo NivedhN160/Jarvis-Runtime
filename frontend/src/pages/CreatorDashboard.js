@@ -350,26 +350,47 @@ const CreatorDashboard = ({ user, onLogout }) => {
             </Card>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {collabRequests.map((collab) => (
-                <Card key={collab.id} className="p-6 bg-white border-0 shadow-sm card-hover" data-testid={`collab-opportunity-${collab.id}`}>
+              {collabRequests.length > 0 && collabRequests[0] && (
+                <Card className="p-6 bg-white border-0 shadow-sm card-hover" data-testid={`collab-opportunity-${collabRequests[0].id}`}>
                   <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-xl font-bold flex-1" style={{ fontFamily: 'Manrope, sans-serif' }}>{collab.title}</h3>
-                    <div className="text-lg font-bold text-green-600">${collab.budget}</div>
+                    <h3 className="text-xl font-bold flex-1" style={{ fontFamily: 'Manrope, sans-serif' }}>{collabRequests[0].title}</h3>
+                    <div className="text-lg font-bold text-green-600">${collabRequests[0].budget}</div>
                   </div>
-                  <p className="text-sm text-gray-500 mb-2">by {collab.startup_name}</p>
-                  <p className="text-gray-600 mb-4">{collab.description}</p>
+                  <p className="text-sm text-gray-500 mb-2">by {collabRequests[0].startup_name}</p>
+                  <p className="text-gray-600 mb-4">{collabRequests[0].description}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="outline" className="border-purple-300 text-purple-700">{collab.target_platform}</Badge>
-                    <Badge variant="outline" className="border-blue-300 text-blue-700">{collab.content_type}</Badge>
+                    <Badge variant="outline" className="border-purple-300 text-purple-700">{collabRequests[0].target_platform}</Badge>
+                    <Badge variant="outline" className="border-blue-300 text-blue-700">{collabRequests[0].content_type}</Badge>
                   </div>
                   <Button 
-                    data-testid={`apply-btn-${collab.id}`}
+                    data-testid={`apply-btn-${collabRequests[0].id}`}
                     className="w-full bg-purple-600 text-white hover:bg-purple-700 h-10 rounded-full font-semibold btn-scale"
                   >
                     Express Interest
                   </Button>
                 </Card>
-              ))}
+              )}
+              {collabRequests.length > 1 && collabRequests[1] && (
+                <Card className="p-6 bg-white border-0 shadow-sm card-hover" data-testid={`collab-opportunity-${collabRequests[1].id}`}>
+                  <div className="flex items-start justify-between mb-3">
+                    <h3 className="text-xl font-bold flex-1" style={{ fontFamily: 'Manrope, sans-serif' }}>{collabRequests[1].title}</h3>
+                    <div className="text-lg font-bold text-green-600">${collabRequests[1].budget}</div>
+                  </div>
+                  <p className="text-sm text-gray-500 mb-2">by {collabRequests[1].startup_name}</p>
+                  <p className="text-gray-600 mb-4">{collabRequests[1].description}</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <Badge variant="outline" className="border-purple-300 text-purple-700">{collabRequests[1].target_platform}</Badge>
+                    <Badge variant="outline" className="border-blue-300 text-blue-700">{collabRequests[1].content_type}</Badge>
+                  </div>
+                  <Button 
+                    data-testid={`apply-btn-${collabRequests[1].id}`}
+                    className="w-full bg-purple-600 text-white hover:bg-purple-700 h-10 rounded-full font-semibold btn-scale"
+                  >
+                    Express Interest
+                  </Button>
+                </Card>
+              )}
+            </div>
             </div>
           )}
         </div>

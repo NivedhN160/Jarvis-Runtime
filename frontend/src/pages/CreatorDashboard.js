@@ -391,7 +391,6 @@ const CreatorDashboard = ({ user, onLogout }) => {
                 </Card>
               )}
             </div>
-            </div>
           )}
         </div>
       </div>

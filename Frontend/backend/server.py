@@ -10,7 +10,7 @@ from typing import List, Optional
 import uuid
 from datetime import datetime, timezone
 import bcrypt
-from emergentintegrations.llm.chat import LlmChat, UserMessage
+from openai import AsyncOpenAI
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -203,13 +203,9 @@ async def generate_matches(collab_id: str):
     if not creators:
         return {"matches": [], "message": "No creator profiles available"}
     
-    # AI matching using GPT-5.2
-    api_key = os.environ.get('EMERGENT_LLM_KEY')
-    chat = LlmChat(
-        api_key=api_key,
-        session_id=f"match_{collab_id}",
-        system_message="You are an AI expert in matching brands with content creators. Analyze the collaboration request and creator profiles to find the best matches."
-    ).with_model("openai", "gpt-5.2")
+    # AI matching using OpenAI GPT-4
+    api_key = os.environ.get('OPENAI_API_KEY')
+    client = AsyncOpenAI(api_key=api_key)
     
     matches = []
     for creator in creators[:5]:  # Analyze top 5 creators
@@ -234,13 +230,28 @@ Creator Profile:
 Provide a match score (0-100) and brief analysis (max 100 words). Format: SCORE:XX|ANALYSIS:your analysis"""
         
         try:
-            user_message = UserMessage(text=prompt)
-            response = await chat.send_message(user_message)
+            response = await client.chat.completions.create(
+                model="gpt-4",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "You are an AI expert in matching brands with content creators. Analyze the collaboration request and creator profiles to find the best matches."
+                    },
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ],
+                temperature=0.7,
+                max_tokens=200
+            )
+            
+            response_text = response.choices[0].message.content
             
             # Parse response
-            if "SCORE:" in response and "ANALYSIS:" in response:
-                score_part = response.split("ANALYSIS:")[0].split("SCORE:")[1].strip()
-                analysis_part = response.split("ANALYSIS:")[1].strip()
+            if "SCORE:" in response_text and "ANALYSIS:" in response_text:
+                score_part = response_text.split("ANALYSIS:")[0].split("SCORE:")[1].strip()
+                analysis_part = response_text.split("ANALYSIS:")[1].strip()
                 score = float(score_part.split("|")[0].strip())
                 
                 match_obj = MatchResult(

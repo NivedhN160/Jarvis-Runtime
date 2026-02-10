@@ -1,6 +1,6 @@
 // craco.config.js
 const path = require("path");
-require("dotenv").config();
+// require("dotenv").config();
 
 // Check if we're in development/preview mode (not production build)
 // Craco sets NODE_ENV=development for start, NODE_ENV=production for build
@@ -16,10 +16,10 @@ const config = {
 let setupDevServer;
 let babelMetadataPlugin;
 
-if (config.enableVisualEdits) {
-  setupDevServer = require("./plugins/visual-edits/dev-server-setup");
-  babelMetadataPlugin = require("./plugins/visual-edits/babel-metadata-plugin");
-}
+// if (config.enableVisualEdits) {
+//   setupDevServer = require("./plugins/visual-edits/dev-server-setup");
+//   babelMetadataPlugin = require("./plugins/visual-edits/babel-metadata-plugin");
+// }
 
 // Conditionally load health check modules only if enabled
 let WebpackHealthPlugin;
@@ -49,15 +49,15 @@ const webpackConfig = {
     configure: (webpackConfig) => {
 
       // Add ignored patterns to reduce watched directories
-        webpackConfig.watchOptions = {
-          ...webpackConfig.watchOptions,
-          ignored: [
-            '**/node_modules/**',
-            '**/.git/**',
-            '**/build/**',
-            '**/dist/**',
-            '**/coverage/**',
-            '**/public/**',
+      webpackConfig.watchOptions = {
+        ...webpackConfig.watchOptions,
+        ignored: [
+          '**/node_modules/**',
+          '**/.git/**',
+          '**/build/**',
+          '**/dist/**',
+          '**/coverage/**',
+          '**/public/**',
         ],
       };
 

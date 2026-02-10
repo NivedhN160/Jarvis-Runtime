@@ -11,16 +11,27 @@ import uuid
 from datetime import datetime, timezone
 import bcrypt
 from openai import AsyncOpenAI
+import asyncio
+from vector_store import vector_store
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+client = AsyncIOMotorClient(mongo_url, serverSelectionTimeoutMS=5000)
+db = client[os.environ.get('DB_NAME', 'test_database')]
 
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
+
+@app.on_event("startup")
+async def startup_db_client():
+    try:
+        await client.admin.command('ping')
+        print("Connected to MongoDB successfully!")
+    except Exception as e:
+        print(f"DATABASE ERROR: Failed to connect to MongoDB: {e}")
+        print("Please ensure MongoDB Server is installed and running, or MONGO_URL in .env is correct.")
 
 # Models
 class UserBase(BaseModel):
@@ -87,31 +98,55 @@ class AnalyticsResponse(BaseModel):
     avg_match_score: float
 
 # Auth endpoints
+@api_router.get("/health")
+async def health_check():
+    try:
+        await client.admin.command('ping')
+        return {"status": "ok", "database": "connected"}
+    except Exception as e:
+        return {"status": "error", "database": str(e)}
+
+# Actionable login/signup endpoints
 @api_router.post("/auth/signup", response_model=User)
 async def signup(user: UserCreate):
+    logger.info(f"Signup attempt for email: {user.email}")
     existing = await db.users.find_one({"email": user.email}, {"_id": 0})
     if existing:
+        logger.warning(f"Signup failed: Email {user.email} already exists")
         raise HTTPException(status_code=400, detail="Email already registered")
     
-    hashed_pw = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
-    user_obj = User(**user.model_dump(exclude={"password"}))
-    
-    doc = user_obj.model_dump()
-    doc['password'] = hashed_pw.decode('utf-8')
-    doc['created_at'] = doc['created_at'].isoformat()
-    
-    await db.users.insert_one(doc)
-    return user_obj
+    try:
+        hashed_pw = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
+        user_obj = User(**user.model_dump(exclude={"password"}))
+        
+        doc = user_obj.model_dump()
+        doc['password'] = hashed_pw.decode('utf-8')
+        doc['created_at'] = doc['created_at'].isoformat()
+        
+        await db.users.insert_one(doc)
+        logger.info(f"User created successfully: {user.email}")
+        return user_obj
+    except Exception as e:
+        logger.error(f"Signup error for {user.email}: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @api_router.post("/auth/login")
 async def login(credentials: UserLogin):
+    logger.info(f"Login attempt for email: {credentials.email}")
     user = await db.users.find_one({"email": credentials.email}, {"_id": 0})
     if not user:
+        logger.warning(f"Login failed: User {credentials.email} not found")
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
-    if not bcrypt.checkpw(credentials.password.encode('utf-8'), user['password'].encode('utf-8')):
-        raise HTTPException(status_code=401, detail="Invalid credentials")
+    try:
+        if not bcrypt.checkpw(credentials.password.encode('utf-8'), user['password'].encode('utf-8')):
+            logger.warning(f"Login failed: Invalid password for {credentials.email}")
+            raise HTTPException(status_code=401, detail="Invalid credentials")
+    except Exception as e:
+        logger.error(f"Login password check error for {credentials.email}: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
     
+    logger.info(f"Login successful for {credentials.email}")
     return {
         "id": user['id'],
         "email": user['email'],
@@ -168,6 +203,14 @@ async def create_creator_profile(profile: CreatorProfileCreate, user_id: str, us
     doc['created_at'] = doc['created_at'].isoformat()
     
     await db.creator_profiles.insert_one(doc)
+    
+    # Link to Vector Store (main.py logic)
+    try:
+        # Run sync vector store add in thread pool to avoid blocking
+        await asyncio.to_thread(vector_store.add_creator, doc)
+    except Exception as e:
+        logger.error(f"Failed to add creator to vector store: {e}")
+        
     return profile_obj
 
 @api_router.get("/profiles", response_model=List[CreatorProfile])
@@ -203,12 +246,44 @@ async def generate_matches(collab_id: str):
     if not creators:
         return {"matches": [], "message": "No creator profiles available"}
     
-    # AI matching using OpenAI GPT-4
-    api_key = os.environ.get('OPENAI_API_KEY')
-    client = AsyncOpenAI(api_key=api_key)
+    # AI matching using Vector Search + LLM (Linked from main.py)
+    
+    # 1. Use Vector Search to find relevant creators
+    query_text = f"{collab['title']} - {collab['description']} ({collab['target_platform']})"
+    try:
+        # Run sync search in thread pool
+        search_results = await asyncio.to_thread(vector_store.search_creators, query_text, n_results=5)
+        
+        # Extract creator IDs from metadata if available, or handle documents
+        # The vector_store.add_creator uses 'id' as the ID in add
+        potential_creator_ids = search_results['ids'][0] if search_results['ids'] else []
+        
+    except Exception as e:
+        logger.error(f"Vector search failed: {e}")
+        potential_creator_ids = []
+
+    # 2. Fetch full profiles for the found IDs
+    if potential_creator_ids:
+        creators = await db.creator_profiles.find({"id": {"$in": potential_creator_ids}}, {"_id": 0}).to_list(100)
+    else:
+        # Fallback to fetching all if vector search fails or returns nothing (cold start)
+        creators = await db.creator_profiles.find({}, {"_id": 0}).to_list(100)
+
+    if not creators:
+        return {"matches": [], "message": "No creator profiles available"}
     
     matches = []
-    for creator in creators[:5]:  # Analyze top 5 creators
+    
+    # 3. Analyze each candidate using the LLM (preserving server.py's detailed scoring structure but using found candidates)
+    # We can use vector_store's client or existing one. Let's use the existing one for consistency in this function 
+    # OR better, use vector_store's specialized prediction if we want to fully "link" main.py's capabilities.
+    # But main.py's prediction was a single summary. server.py expects a list of scored matches.
+    # We'll stick to server.py's scoring loop but on the *filtered* list from vector_store.
+    
+    api_key = os.environ.get('OPENAI_API_KEY')
+    client = AsyncOpenAI(api_key=api_key)
+
+    for creator in creators:
         prompt = f"""Analyze this match:
         
 Collaboration Request:
@@ -276,24 +351,46 @@ Provide a match score (0-100) and brief analysis (max 100 words). Format: SCORE:
     
     # Sort by score
     matches.sort(key=lambda x: x['score'], reverse=True)
-    return {"matches": matches[:3], "total_analyzed": len(creators)}
+    return {"matches": matches, "total_analyzed": len(creators)}
 
-@api_router.get("/matches/{collab_id}")
-async def get_matches(collab_id: str):
-    matches = await db.matches.find({"collab_request_id": collab_id}, {"_id": 0}).to_list(100)
-    
-    result = []
-    for match in matches:
-        creator = await db.creator_profiles.find_one({"id": match['creator_profile_id']}, {"_id": 0})
-        if creator:
-            result.append({
-                "creator": creator,
-                "score": match['score'],
-                "analysis": match['ai_analysis']
-            })
-    
     result.sort(key=lambda x: x['score'], reverse=True)
     return {"matches": result}
+
+# AI Generation endpoint
+class GenerateDescriptionRequest(BaseModel):
+    title: str
+    platform: str
+    content_type: str
+
+@api_router.post("/ai/generate-description")
+async def generate_description(request: GenerateDescriptionRequest):
+    api_key = os.environ.get('OPENAI_API_KEY')
+    if not api_key:
+        raise HTTPException(status_code=500, detail="AI service not configured")
+        
+    client = AsyncOpenAI(api_key=api_key)
+    
+    prompt = f"""Write a compelling collaboration description for a startup looking for creators.
+    Title: {request.title}
+    Platform: {request.platform}
+    Type: {request.content_type}
+    
+    Keep it professional, exciting, and under 50 words."""
+
+    try:
+        response = await client.chat.completions.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": "You are a creative marketing assistant."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.7,
+            max_tokens=100
+        )
+        return {"description": response.choices[0].message.content.strip()}
+    except Exception as e:
+        logger.error(f"AI generation failed: {e}")
+        raise HTTPException(status_code=500, detail="AI Generation failed")
 
 # Analytics endpoint
 @api_router.get("/analytics", response_model=AnalyticsResponse)
@@ -312,12 +409,19 @@ async def get_analytics():
         avg_match_score=round(avg_score, 2)
     )
 
+@app.get("/")
+async def root():
+    return {"message": "Jarvis Runtime Backend is running"}
+
 app.include_router(api_router)
 
 app.add_middleware(
     CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ],
     allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
     allow_methods=["*"],
     allow_headers=["*"],
 )

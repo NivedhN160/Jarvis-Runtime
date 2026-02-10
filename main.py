@@ -81,10 +81,12 @@ async def analyze_matching(request: MatchRequest):
         n_results=2
     )
     top_creators = search_results['documents'][0]
+    prompt = f"""
     Reasoning: high
     Startup Goal: {request.startup_description}
     Target Audience: {request.target_audience}
     Potential Creators Found: {top_creators}
+    """
     completion = client.chat.completions.create(
         model="openai/gpt-oss-120b:groq",
         messages=[{"role": "user", "content": prompt}]
@@ -97,4 +99,4 @@ async def analyze_matching(request: MatchRequest):
     }
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0"0 port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)

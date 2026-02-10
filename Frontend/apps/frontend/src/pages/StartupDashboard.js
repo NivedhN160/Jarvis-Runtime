@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Card } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
+import { Textarea } from '../components/ui/textarea';
+import { Card } from '../components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../components/ui/dialog';
 import { toast } from 'sonner';
 import { Sparkles, Plus, Target, TrendingUp, Users, LogOut, Loader2, Zap, Instagram, Youtube } from 'lucide-react';
+import { ThemeToggle } from '../components/ThemeToggle';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -29,6 +30,8 @@ const StartupDashboard = ({ user, onLogout }) => {
     target_platform: 'Both',
     content_type: 'Any'
   });
+
+  const [createLoading, setCreateLoading] = useState(false);
 
   useEffect(() => {
     loadCollabs();
@@ -55,6 +58,7 @@ const StartupDashboard = ({ user, onLogout }) => {
 
   const handleCreateCollab = async (e) => {
     e.preventDefault();
+    setCreateLoading(true);
     try {
       await axios.post(`${API}/collabs?user_id=${user.id}&user_name=${user.name}`, formData);
       toast.success('Collaboration request created!');
@@ -69,6 +73,8 @@ const StartupDashboard = ({ user, onLogout }) => {
       loadCollabs();
     } catch (error) {
       toast.error('Failed to create collaboration');
+    } finally {
+      setCreateLoading(false);
     }
   };
 
@@ -96,21 +102,22 @@ const StartupDashboard = ({ user, onLogout }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50" data-testid="startup-dashboard">
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300" data-testid="startup-dashboard">
       {/* Navigation */}
-      <nav className="glass-nav sticky top-0 z-50">
+      <nav className="glass-nav sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
         <div className="px-6 md:px-12 lg:px-24 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-blue-600" />
-            <span className="text-xl font-bold" style={{ fontFamily: 'Manrope, sans-serif' }}>CreConnect</span>
+            <Sparkles className="h-6 w-6 text-primary" />
+            <span className="text-xl font-bold" style={{ fontFamily: 'Manrope, sans-serif' }}>MAT-CHA.AI</span>
           </div>
           <div className="flex items-center gap-4">
-            <div className="text-sm text-gray-600">Welcome, <span className="font-semibold">{user.name}</span></div>
-            <Button 
+            <ThemeToggle />
+            <div className="text-sm text-muted-foreground">Welcome, <span className="font-semibold text-foreground">{user.name}</span></div>
+            <Button
               data-testid="logout-btn"
               onClick={handleLogout}
               variant="ghost"
-              className="hover:bg-gray-100 rounded-full"
+              className="hover:bg-accent hover:text-accent-foreground rounded-full"
             >
               <LogOut className="h-4 w-4 mr-2" /> Logout
             </Button>
@@ -122,16 +129,16 @@ const StartupDashboard = ({ user, onLogout }) => {
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-3" style={{ fontFamily: 'Manrope, sans-serif' }}>Startup Dashboard</h1>
-          <p className="text-lg text-gray-600">Create collaboration requests and discover perfect creator matches</p>
+          <p className="text-lg text-muted-foreground">Create collaboration requests and discover perfect creator matches</p>
         </div>
 
         {/* Analytics Cards */}
         {analytics && (
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-            <Card className="p-6 bg-white border-0 shadow-sm" data-testid="analytics-card-requests">
+            <Card className="p-6 bg-card border-0 shadow-sm" data-testid="analytics-card-requests">
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-sm text-gray-600 mb-1">Total Requests</div>
+                  <div className="text-sm text-muted-foreground mb-1">Total Requests</div>
                   <div className="text-3xl font-bold" style={{ fontFamily: 'Manrope, sans-serif' }}>{analytics.total_requests}</div>
                 </div>
                 <div className="bg-blue-100 p-3 rounded-xl">
@@ -139,10 +146,10 @@ const StartupDashboard = ({ user, onLogout }) => {
                 </div>
               </div>
             </Card>
-            <Card className="p-6 bg-white border-0 shadow-sm" data-testid="analytics-card-creators">
+            <Card className="p-6 bg-card border-0 shadow-sm" data-testid="analytics-card-creators">
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-sm text-gray-600 mb-1">Active Creators</div>
+                  <div className="text-sm text-muted-foreground mb-1">Active Creators</div>
                   <div className="text-3xl font-bold" style={{ fontFamily: 'Manrope, sans-serif' }}>{analytics.total_creators}</div>
                 </div>
                 <div className="bg-purple-100 p-3 rounded-xl">
@@ -150,10 +157,10 @@ const StartupDashboard = ({ user, onLogout }) => {
                 </div>
               </div>
             </Card>
-            <Card className="p-6 bg-white border-0 shadow-sm" data-testid="analytics-card-matches">
+            <Card className="p-6 bg-card border-0 shadow-sm" data-testid="analytics-card-matches">
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-sm text-gray-600 mb-1">Total Matches</div>
+                  <div className="text-sm text-muted-foreground mb-1">Total Matches</div>
                   <div className="text-3xl font-bold" style={{ fontFamily: 'Manrope, sans-serif' }}>{analytics.total_matches}</div>
                 </div>
                 <div className="bg-green-100 p-3 rounded-xl">
@@ -161,10 +168,10 @@ const StartupDashboard = ({ user, onLogout }) => {
                 </div>
               </div>
             </Card>
-            <Card className="p-6 bg-white border-0 shadow-sm" data-testid="analytics-card-score">
+            <Card className="p-6 bg-card border-0 shadow-sm" data-testid="analytics-card-score">
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-sm text-gray-600 mb-1">Avg Match Score</div>
+                  <div className="text-sm text-muted-foreground mb-1">Avg Match Score</div>
                   <div className="text-3xl font-bold" style={{ fontFamily: 'Manrope, sans-serif' }}>{analytics.avg_match_score}%</div>
                 </div>
                 <div className="bg-yellow-100 p-3 rounded-xl">
@@ -179,7 +186,7 @@ const StartupDashboard = ({ user, onLogout }) => {
         <div className="mb-8">
           <Dialog open={showNewCollab} onOpenChange={setShowNewCollab}>
             <DialogTrigger asChild>
-              <Button 
+              <Button
                 data-testid="create-collab-btn"
                 className="bg-blue-600 text-white hover:bg-blue-700 h-11 px-8 rounded-full font-semibold btn-scale"
               >
@@ -200,11 +207,38 @@ const StartupDashboard = ({ user, onLogout }) => {
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                     required
-                    className="mt-1"
+                    className="mt-1 bg-background border-input text-foreground focus:ring-ring"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="description">Description</Label>
+                  <Label htmlFor="description" className="flex items-center justify-between">
+                    Description
+                    <Button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (!formData.title) return toast.error("Enter a title first");
+                        const promise = axios.post(`${API}/ai/generate-description`, {
+                          title: formData.title,
+                          platform: formData.target_platform,
+                          content_type: formData.content_type
+                        });
+
+                        toast.promise(promise, {
+                          loading: 'Generating with AI...',
+                          success: (res) => {
+                            setFormData(prev => ({ ...prev, description: res.data.description }));
+                            return "Generated!";
+                          },
+                          error: 'Failed to generate'
+                        });
+                      }}
+                      variant="ghost"
+                      size="sm"
+                      className="text-primary hover:text-primary h-6 px-2 text-xs"
+                    >
+                      <Sparkles className="h-3 w-3 mr-1" /> AI Generate
+                    </Button>
+                  </Label>
                   <Textarea
                     id="description"
                     data-testid="collab-description-input"
@@ -212,7 +246,7 @@ const StartupDashboard = ({ user, onLogout }) => {
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                     required
-                    className="mt-1 min-h-[120px]"
+                    className="mt-1 min-h-[120px] bg-background border-input text-foreground focus:ring-ring"
                   />
                 </div>
                 <div>
@@ -225,13 +259,13 @@ const StartupDashboard = ({ user, onLogout }) => {
                     value={formData.budget}
                     onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                     required
-                    className="mt-1"
+                    className="mt-1 bg-background border-input text-foreground focus:ring-ring"
                   />
                 </div>
                 <div>
                   <Label htmlFor="platform">Target Platform</Label>
                   <Select value={formData.target_platform} onValueChange={(v) => setFormData({ ...formData, target_platform: v })}>
-                    <SelectTrigger data-testid="platform-select" className="mt-1">
+                    <SelectTrigger data-testid="platform-select" className="mt-1 bg-background border-input text-foreground">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -244,7 +278,7 @@ const StartupDashboard = ({ user, onLogout }) => {
                 <div>
                   <Label htmlFor="content-type">Content Type</Label>
                   <Select value={formData.content_type} onValueChange={(v) => setFormData({ ...formData, content_type: v })}>
-                    <SelectTrigger data-testid="content-type-select" className="mt-1">
+                    <SelectTrigger data-testid="content-type-select" className="mt-1 bg-background border-input text-foreground">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -255,12 +289,17 @@ const StartupDashboard = ({ user, onLogout }) => {
                     </SelectContent>
                   </Select>
                 </div>
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   data-testid="submit-collab-btn"
-                  className="w-full bg-blue-600 text-white hover:bg-blue-700 h-11 rounded-full font-semibold btn-scale mt-6"
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-full font-semibold btn-scale mt-6 disabled:opacity-70"
+                  disabled={createLoading}
                 >
-                  Create Request
+                  {createLoading ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <Sparkles className="h-4 w-4 animate-spin" /> Creating...
+                    </span>
+                  ) : 'Create Request'}
                 </Button>
               </form>
             </DialogContent>
@@ -271,25 +310,25 @@ const StartupDashboard = ({ user, onLogout }) => {
         <div>
           <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Manrope, sans-serif' }}>Your Collaboration Requests</h2>
           {collabs.length === 0 ? (
-            <Card className="p-12 text-center bg-white border-0 shadow-sm">
+            <Card className="p-12 text-center bg-card border-0 shadow-sm">
               <Target className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-              <p className="text-gray-600">No collaboration requests yet. Create your first one to get started!</p>
+              <p className="text-muted-foreground">No collaboration requests yet. Create your first one to get started!</p>
             </Card>
           ) : (
             <div className="grid grid-cols-1 gap-6">
               {collabs.map((collab) => (
-                <Card key={collab.id} className="p-6 bg-white border-0 shadow-sm card-hover" data-testid={`collab-card-${collab.id}`}>
+                <Card key={collab.id} className="p-6 bg-card border-0 shadow-sm card-hover" data-testid={`collab-card-${collab.id}`}>
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                     <div className="flex-1">
                       <h3 className="text-xl font-bold mb-2" style={{ fontFamily: 'Manrope, sans-serif' }}>{collab.title}</h3>
-                      <p className="text-gray-600 mb-4">{collab.description}</p>
+                      <p className="text-muted-foreground mb-4">{collab.description}</p>
                       <div className="flex flex-wrap gap-3">
                         <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">${collab.budget}</span>
                         <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">{collab.target_platform}</span>
                         <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">{collab.content_type}</span>
                       </div>
                     </div>
-                    <Button 
+                    <Button
                       data-testid={`find-matches-btn-${collab.id}`}
                       onClick={() => handleGenerateMatches(collab.id)}
                       disabled={matchLoading && selectedCollab === collab.id}
@@ -314,7 +353,7 @@ const StartupDashboard = ({ user, onLogout }) => {
             <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Manrope, sans-serif' }}>AI-Suggested Matches</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {matches.map((match, idx) => (
-                <Card key={idx} className="p-6 bg-white border-2 border-blue-200 shadow-lg match-glow" data-testid={`match-card-${idx}`}>
+                <Card key={idx} className="p-6 bg-card border-2 border-blue-200 shadow-lg match-glow" data-testid={`match-card-${idx}`}>
                   <div className="flex items-center justify-between mb-4">
                     <div className="text-2xl font-bold text-blue-600" style={{ fontFamily: 'Manrope, sans-serif' }}>
                       {Math.round(match.score)}% Match
@@ -324,7 +363,7 @@ const StartupDashboard = ({ user, onLogout }) => {
                     </div>
                   </div>
                   <h3 className="text-xl font-bold mb-2" style={{ fontFamily: 'Manrope, sans-serif' }}>{match.creator.creator_name}</h3>
-                  <p className="text-sm text-gray-600 mb-4">{match.creator.bio}</p>
+                  <p className="text-sm text-muted-foreground mb-4">{match.creator.bio}</p>
                   <div className="flex gap-2 mb-4">
                     {match.creator.platforms.includes('Instagram') && (
                       <div className="flex items-center gap-1 text-xs bg-pink-100 text-pink-700 px-2 py-1 rounded-full">
@@ -341,7 +380,7 @@ const StartupDashboard = ({ user, onLogout }) => {
                     <div className="text-xs text-gray-500 mb-2 font-semibold">AI Analysis:</div>
                     <p className="text-sm text-gray-700">{match.analysis}</p>
                   </div>
-                  <Button 
+                  <Button
                     data-testid={`contact-creator-btn-${idx}`}
                     className="w-full mt-4 bg-blue-600 text-white hover:bg-blue-700 h-10 rounded-full font-semibold btn-scale"
                   >

@@ -5,7 +5,65 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc0b64ba-172c-44d1-bf54-6bd29d60081d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/craco.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/craco.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/accordion.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/accordion.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/alert-dialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/alert-dialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/alert.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/alert.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/avatar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/avatar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/badge.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/badge.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/breadcrumb.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/breadcrumb.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/button.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/button.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/calendar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/calendar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/card.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/card.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/carousel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/carousel.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/checkbox.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/checkbox.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/command.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/command.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/context-menu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/context-menu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/dialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/dialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/drawer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/drawer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/dropdown-menu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/dropdown-menu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/form.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/hover-card.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/hover-card.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/input-otp.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/input-otp.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/input.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/input.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/label.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/label.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/menubar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/menubar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/navigation-menu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/navigation-menu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/pagination.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/pagination.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/popover.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/popover.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/progress.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/progress.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/radio-group.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/radio-group.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/resizable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/resizable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/scroll-area.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/scroll-area.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/select.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/select.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/separator.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/separator.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/sheet.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/sheet.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/skeleton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/skeleton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/slider.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/slider.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/switch.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/switch.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/table.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/tabs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/tabs.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/textarea.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/textarea.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/toast.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/toast.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/toaster.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/toaster.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/toggle-group.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/toggle-group.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/toggle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/toggle.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/tooltip.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/components/ui/tooltip.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/pages/AuthPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/pages/AuthPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/pages/CreatorDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/pages/CreatorDashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/pages/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/pages/LandingPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/src/pages/StartupDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/src/pages/StartupDashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/apps/frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/apps/frontend/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/backend/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/backend/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/backend/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/backend/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chroma_db/chroma.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/chroma_db/chroma.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -9,8 +9,11 @@ import CreatorDashboard from './pages/CreatorDashboard';
 
 import { ThemeProvider } from './context/ThemeContext';
 
+import ChatBot from './components/ChatBot';
+
 function App() {
   const [user, setUser] = React.useState(null);
+  const [isChatOpen, setIsChatOpen] = React.useState(false);
 
   React.useEffect(() => {
     const savedUser = localStorage.getItem('user');
@@ -45,9 +48,10 @@ function App() {
             />
             <Route
               path="/creator"
-              element={user && user.role === 'creator' ? <CreatorDashboard user={user} onLogout={handleLogout} /> : <Navigate to="/auth" />}
+              element={user && user.role === 'creator' ? <CreatorDashboard user={user} onLogout={handleLogout} onOpenChat={() => setIsChatOpen(true)} /> : <Navigate to="/auth" />}
             />
           </Routes>
+          {user && <ChatBot isOpen={isChatOpen} setIsOpen={setIsChatOpen} />}
         </BrowserRouter>
         <Toaster position="top-right" />
       </div>

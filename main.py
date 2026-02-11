@@ -1,4 +1,6 @@
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 from typing import List, Optional
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy import Column, Integer, String, Float, create_engine
@@ -13,11 +15,30 @@ Base = declarative_base()
 chroma_client = chromadb.PersistentClient(path="./chroma_db")
 creator_collection = chroma_client.get_or_create_collection(name="creators")
 
-# AI Setup (gpt-oss-120b via Hugging Face Router)
-client = OpenAI(
-    base_url="https://router.huggingface.co/v1",
-    api_key=os.environ.get("HF_TOKEN")  # Set this in your environment
-)
+# Load common configuration
+env_path = Path("Frontend/backend/.env")
+load_dotenv(dotenv_path=env_path, override=True)
+
+# AI Setup (Automatic detection)
+FALLBACK_KEY = "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"
+HF_TOKEN = os.environ.get("HF_TOKEN")
+OPENAI_KEY = os.environ.get("OPENAI_API_KEY")
+
+if not HF_TOKEN and not OPENAI_KEY:
+    if FALLBACK_KEY.startswith("hf_"):
+        HF_TOKEN = FALLBACK_KEY
+    elif FALLBACK_KEY.startswith("sk-"):
+        OPENAI_KEY = FALLBACK_KEY
+
+if HF_TOKEN:
+    client = OpenAI(
+        base_url="https://router.huggingface.co/v1",
+        api_key=HF_TOKEN
+    )
+    AI_MODEL = "openai/gpt-oss-120b:groq"
+else:
+    client = OpenAI(api_key=OPENAI_KEY)
+    AI_MODEL = "gpt-4"
 
 
 # --- 2. SQL MODELS ---
@@ -88,7 +109,7 @@ async def analyze_matching(request: MatchRequest):
     Potential Creators Found: {top_creators}
     """
     completion = client.chat.completions.create(
-        model="openai/gpt-oss-120b:groq",
+        model=AI_MODEL,
         messages=[{"role": "user", "content": prompt}]
     )
     return {

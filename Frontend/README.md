@@ -1,85 +1,64 @@
-# MAT-CHA.AI - AI-Powered Creator & Startup Collaboration Platform
+# MAT-CHA.AI - Intelligent Collaboration Platform
 
-MAT-CHA.AI is a modern web application designed to bridge the gap between startups and content creators. It features a sleek, themeable interface, robust authentication, and AI-driven content generation and matching.
+An AI-powered matchmaking platform connecting startups with content creators for impactful social media campaigns.
 
----
+## Key Features
 
-## 🚀 Getting Started
+1.  **AI Matchmaking**: Intelligent algorithm matches startups with creators based on niche, platform, budget, and content style.
+2.  **AI Writer & Chatbot**: Built-in AI assistant ("Writer Mode") to help create scripts and captions instantly.
+3.  **Shared Chat Hub**: A centralized "Messages" tab for both startups and creators to negotiate details directly.
+4.  **Mutual Confirmation**: A formal "Confirm Deal" mechanism where both parties must agree to finalize the collaboration.
+5.  **Real-Time Analytics**: Track engagement rates, follower growth, and campaign performance.
+6.  **Secure Authentication**: Role-based access for Startups and Creators.
+7.  **Robust Deployment**: Ready for cloud scaling with MongoDB Atlas and Python FastAPI backend.
 
-To run the application, you need to start both the **Backend** and the **Frontend** servers.
+## Tech Stack
 
-### 📋 Prerequisites
-*   **Node.js & npm**: Installed on your system.
-*   **Python 3.10+**: For the backend server.
-*   **MongoDB**: Ensure MongoDB Community Server is installed and the service is running on `localhost:27017`.
-    *   *Tip:* Use **MongoDB Compass** to visually manage your data.
+*   **Frontend**: React.js, TailwindCSS, Shadcn/UI
+*   **Backend**: Python FastAPI, Uvicorn
+*   **Database**: MongoDB Atlas (Cloud)
+*   **AI Engine**: 
+    *   **Primary**: Groq API (Llama-3-8b-instant) - Fast & Free
+    *   **Fallback**: Hugging Face Router (Mistral-7B) / Local `distilgpt2`
+*   **Deployment**: Vercel (Frontend) + Render (Backend)
 
----
+## Getting Started
 
-## 🛠️ Installation & Setup
+### Prerequisites
+*   Node.js & npm
+*   Python 3.8+
+*   MongoDB Atlas Account (or local MongoDB)
 
-### 1. Backend Setup
-1. Open a terminal and navigate to the backend directory:
-   ```powershell
-   cd Frontend/backend
-   ```
-2. (Optional) Create and activate a virtual environment:
-   ```powershell
-   python -m venv venv
-   .\venv\Scripts\activate
-   ```
-3. Install dependencies:
-   ```powershell
-   pip install -r requirements.txt
-   ```
-4. Start the server:
-   ```powershell
-   uvicorn server:app --reload --host 0.0.0.0 --port 8000
-   ```
+### Installation
 
-### 2. Frontend Setup
-1. Open a **new** terminal and navigate to the frontend directory:
-   ```powershell
-   cd Frontend/apps/frontend
-   ```
-2. Install dependencies:
-   ```powershell
-   npm install --legacy-peer-deps
-   ```
-3. Start the application:
-   ```powershell
-   npm start
-   ```
-   *The app will automatically open at `http://localhost:3000`.*
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/your-username/mat-cha-ai.git
+    cd mat-cha-ai
+    ```
 
----
+2.  **Backend Setup**
+    ```bash
+    cd Frontend/backend
+    pip install -r requirements.txt
+    
+    # Create .env file with your credentials
+    # MONGO_URL=mongodb+srv://...
+    # GROQ_API_KEY=gsk_...
+    
+    python server.py
+    ```
 
-## ✨ Key Features
+3.  **Frontend Setup**
+    ```bash
+    cd Frontend/apps/frontend
+    npm install
+    npm start
+    ```
 
-### 👤 Role-Based Authentication
-*   **Startups**: Create collaboration requests, manage campaigns, and find creators.
-*   **Creators**: Build a professional profile, showcase portfolios, and discover opportunities.
-*   **Secure**: All passwords are encrypted using `bcrypt`.
+## Deployment
 
-### 🤖 AI Capabilities
-*   **AI Description Generator**: Instantly generate professional campaign descriptions in the "New Collaboration" modal.
-*   **Smart Matchmaking**: Uses LLMs and Vector Search (ChromaDB) to predict high-success partnerships based on brand alignment.
+See [`VERCEL_GUIDE.md`](VERCEL_GUIDE.md) and [`DEPLOYMENT.md`](DEPLOYMENT.md) for detailed instructions on how to host this project for free.
 
-### 🌓 Premium Theming System
-*   **Light Mode**: Clean and professional.
-*   **Dark Mode**: Sleek and modern.
-*   **Reader Mode**: Warm tones designed for long periods of focus and eye comfort.
-
----
-
-## 🔧 Troubleshooting
-
-### MongoDB "Connection Refused"
-If the app shows a "Database Offline" badge:
-1. Press `Win + R`, type `services.msc`, and hit Enter.
-2. Find **MongoDB Server** in the list.
-3. Right-click and select **Start**.
-
-### Authentication "Network Error"
-*   Ensure the backend is running at `http://localhost:8000`.
-*   Check the `/api/health` endpoint in your browser to verify the connection status.
+## License
+MIT

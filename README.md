@@ -9,6 +9,13 @@ This is the root directory for the MAT-CHA.AI project.
   - **`backend/`**: The FastAPI backend server and database logic.
 - **`main.py`**: Original prototype/script for AI logic.
 
+## 🚀 Latest Updates
+
+- **Shared Messaging Hub**: Real-time chat system for startups and creators to interact.
+- **Mutual Deal Confirmation**: Secure mechanism for both parties to finalize collaborations.
+- **Improved Dashboards**: Fully integrated "Messages" tab in both Startup and Creator views.
+- **Robust Field Metadata**: Matches now track collab titles and names for better historical reference.
+
 ## 📖 Documentation
 
 For detailed instructions on how to install, configure, and run the application, please refer to the main documentation here:

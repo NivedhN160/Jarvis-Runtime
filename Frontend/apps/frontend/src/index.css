@@ -101,6 +101,8 @@ h1, h2, h3, h4, h5, h6 {
         --border: 40 20% 85%;
         --input: 40 20% 85%;
         --ring: 24 20% 40%;
+        
+        font-family: 'Merriweather', 'Georgia', serif;
     }
 }
 

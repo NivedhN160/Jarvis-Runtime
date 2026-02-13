@@ -177,6 +177,14 @@ async def update_match(match_id: str, update: MatchUpdate):
         
     return updated_match
 
+@api_router.get("/health")
+async def health_check():
+    try:
+        await client.admin.command('ping')
+        return {"status": "ok", "database": "connected"}
+    except Exception as e:
+        return {"status": "error", "database": str(e)}
+
 # Auth endpoints
 
 
@@ -839,15 +847,21 @@ async def root():
 
 app.include_router(api_router)
 
+# CORS Configuration
+# For production, set CORS_ORIGINS in Render to your Amplify URL (e.g., https://main.xxx.amplifyapp.com)
+origins = os.environ.get("CORS_ORIGINS", "*").split(",")
+# Clean whitespace
+origins = [o.strip() for o in origins]
+
+# Always include localhost variations
+if "http://localhost:3000" not in origins:
+    origins.append("http://localhost:3000")
+if "http://127.0.0.1:3000" not in origins:
+    origins.append("http://127.0.0.1:3000")
+
 app.add_middleware(
     CORSMiddleware,
-    # Explicitly list all localhost variations to be safe
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:8000",  # Self calls
-        "http://127.0.0.1:8000"
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

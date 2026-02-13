@@ -75,9 +75,16 @@ React apps use client-side routing. If you refresh the page on a sub-route (like
    - **Build Command**: `pip install -r requirements.txt`
    - **Start Command**: `uvicorn server:app --host 0.0.0.0 --port $PORT`
 5. **Environment Variables**:
-   - Add `MONGO_URL`: (Your MongoDB Atlas string)
+   - Add `MONGO_URL`: `mongodb+srv://MAT-CHA:<db_password>@cluster0.hufgf3m.mongodb.net/?appName=Cluster0`
    - Add `GROQ_API_KEY`: (Your Groq API key)
 6. Click **Create Web Service**.
+
+---
+
+## Step 4: Database Setup (MongoDB Atlas)
+1. In MongoDB Atlas, go to "Network Access" and whitelist `0.0.0.0/0`.
+2. Go to "Database User" and ensure user `MAT-CHA` has "Read and Write" access.
+3. Install the driver locally if testing: `python -m pip install "pymongo[srv]"`
 
 ---
 

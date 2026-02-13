@@ -9,8 +9,13 @@ Since you cannot run MongoDB on GitHub, use the free cloud version.
 1. Go to [MongoDB Atlas](https://www.mongodb.com/atlas/database).
 2. Create a free cluster (M0 Sandbox).
 3. Create a user (username/password) and whitelist `0.0.0.0/0` (allow access from anywhere) in Network Access.
-4. Get your connection string: `mongodb+srv://<user>:<password>@cluster...`
-5. You will use this as your `MONGO_URL` in the backend.
+4. Install the required driver in your backend:
+   ```bash
+   python -m pip install "pymongo[srv]"
+   ```
+5. Get your connection string from "Connect" > "Drivers":
+   `mongodb+srv://MAT-CHA:<db_password>@cluster0.hufgf3m.mongodb.net/?appName=Cluster0`
+6. You will use this as your `MONGO_URL` in the backend `.env` file (replace `<db_password>` with your actual password).
 
 ## 2. The Backend (Render.com or Railway)
 The Python server needs to run 24/7.

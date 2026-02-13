@@ -29,7 +29,10 @@ const ChatDialog = ({ open, onOpenChange, matchId, currentUserId, currentUserNam
         if (open && matchId) {
             loadMessages();
             loadMatchDetails();
-            const interval = setInterval(loadMessages, 5000); // Poll every 5s
+            const interval = setInterval(() => {
+                loadMessages();
+                loadMatchDetails();
+            }, 3000); // Poll every 3s for better real-time feel
             return () => clearInterval(interval);
         }
     }, [open, matchId]);
@@ -37,42 +40,59 @@ const ChatDialog = ({ open, onOpenChange, matchId, currentUserId, currentUserNam
     const loadMessages = async () => {
         try {
             const res = await axios.get(`${API}/chat/messages/${matchId}`);
-            setMessages(res.data);
-            setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
+            setMessages(prev => {
+                // Only scroll if we have NEW messages
+                if (res.data.length > prev.length) {
+                    setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
+                }
+                return res.data;
+            });
         } catch (e) {
             console.error("Failed to load chat", e);
         }
     };
 
     const loadMatchDetails = async () => {
-        // We need an endpoint to get match details or pass it in.
-        // For now, let's assume we can PUT to get the latest status if we update, 
-        // but initially we might just rely on passed props if available, 
-        // OR we just use the PUT endpoint to check current status effectively?
-        // Actually, let's add a lightweight GET for match status or just use the updated match object returned from PUT.
-        // For simplicity, we just use the PUT endpoint with empty update to get current state? No that updates.
-        // We will fetch all matches and find this one, or add a specific GET /matches/{id} endpoint.
-        // Let's just assume we can fetch it via the list for now or we just track our own actions.
-        // Wait, I added GET /matches but it returns a list. 
-        // Let's just assume for MVP the parent component passes the initial status, 
-        // and we only update it when WE take action.
+        try {
+            const res = await axios.get(`${API}/matches/${matchId}`);
+            setMatchDetails(res.data);
+        } catch (e) {
+            console.error("Failed to load match details", e);
+        }
     };
 
     const sendMessage = async (e) => {
         e.preventDefault();
         if (!newMessage.trim()) return;
 
+        const messageContent = newMessage;
+        const tempMsg = {
+            id: 'temp-' + Date.now(),
+            sender_id: currentUserId,
+            sender_name: currentUserName,
+            content: messageContent,
+            timestamp: new Date().toISOString()
+        };
+
+        // Optimistic update
+        setMessages(prev => [...prev, tempMsg]);
+        setNewMessage('');
+
+        // Scroll to bottom immediately
+        setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
+
         try {
             await axios.post(`${API}/chat/messages`, {
                 match_id: matchId,
                 sender_id: currentUserId,
                 sender_name: currentUserName,
-                content: newMessage
+                content: messageContent
             });
-            setNewMessage('');
             loadMessages();
         } catch (e) {
             toast.error("Failed to send message");
+            // Remove optimistic message on failure
+            setMessages(prev => prev.filter(m => m.id !== tempMsg.id));
         }
     };
 

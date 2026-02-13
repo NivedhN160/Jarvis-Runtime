@@ -6,11 +6,11 @@ An AI-powered matchmaking platform connecting startups with content creators for
 
 1.  **AI Matchmaking**: Intelligent algorithm matches startups with creators based on niche, platform, budget, and content style.
 2.  **AI Writer & Chatbot**: Built-in AI assistant ("Writer Mode") to help create scripts and captions instantly.
-3.  **Shared Chat Hub**: A centralized "Messages" tab for both startups and creators to negotiate details directly.
-4.  **Mutual Confirmation**: A formal "Confirm Deal" mechanism where both parties must agree to finalize the collaboration.
-5.  **Real-Time Analytics**: Track engagement rates, follower growth, and campaign performance.
-6.  **Secure Authentication**: Role-based access for Startups and Creators.
-7.  **Robust Deployment**: Ready for cloud scaling with MongoDB Atlas and Python FastAPI backend.
+3.  **Real-Time Chat Hub**: Optimized messaging with **Optimistic UI** (messages appear instantly) and background polling.
+4.  **Mutual Confirmation**: A formal "Confirm Deal" mechanism that syncs in real-time across both user dashboards.
+5.  **Health-Checked Architecture**: Integrated backend monitoring to ensure MongoDB and AI services are always online.
+6.  **Secure Authentication**: Role-based access for Startups and Creators with password hashing (Bcrypt).
+7.  **Cloud Native Deployment**: Pre-configured for **AWS Amplify** and **Render**.
 
 ## Tech Stack
 

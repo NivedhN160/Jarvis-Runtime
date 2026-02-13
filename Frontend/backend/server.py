@@ -147,6 +147,15 @@ async def get_matches(creator_id: Optional[str] = None, startup_id: Optional[str
             m['created_at'] = datetime.fromisoformat(m['created_at'])
     return matches
 
+@api_router.get("/matches/{match_id}", response_model=MatchResult)
+async def get_match(match_id: str):
+    match = await db.matches.find_one({"id": match_id}, {"_id": 0})
+    if not match:
+        raise HTTPException(status_code=404, detail="Match not found")
+    if isinstance(match['created_at'], str):
+        match['created_at'] = datetime.fromisoformat(match['created_at'])
+    return match
+
 @api_router.put("/matches/{match_id}", response_model=MatchResult)
 async def update_match(match_id: str, update: MatchUpdate):
     match = await db.matches.find_one({"id": match_id}, {"_id": 0})

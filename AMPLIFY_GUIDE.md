@@ -48,6 +48,7 @@ git push origin main
            paths:
              - node_modules/**/*
    ```
+   *Note: If Amplify executes from the project root instead of the subfolder, use `cd Frontend/apps/frontend` in each phase.*
 7. **Environment Variables**:
    - Add `REACT_APP_BACKEND_URL`
    - Value: `https://mat-cha-backend.onrender.com` (Your Render URL)
@@ -89,5 +90,7 @@ React apps use client-side routing. If you refresh the page on a sub-route (like
 ---
 
 ## Troubleshooting
-- **Backend CORS Error**: Ensure you update the `CORS_ORIGINS` in your Render environment variables to include your new AWS Amplify URL (e.g., `https://main.dxxxxx.amplifyapp.com`).
-- **Build Fails**: Check the "Build" logs in the Amplify console. Ensure the "Root Directory" is set correctly to `Frontend/apps/frontend`.
+- **Backend CORS Error**: Ensure you update the `CORS_ORIGINS` in your Render environment variables. You can sets it to `*` for testing, or better, your specific Amplify URL (e.g., `https://main.dxxxxx.amplifyapp.com`).
+- **Network Error (Frontend)**: Check if `REACT_APP_BACKEND_URL` in Amplify has a trailing slash. It should NOT have one (e.g., `https://api.render.com`).
+- **MongoDB Connection**: Ensure your Cluster connection string includes `?appName=Cluster0` and that you have whitelisted `0.0.0.0/0` in Atlas.
+- **Health Check**: Visit `https://your-backend.onrender.com/api/health` to verify the backend-database link.

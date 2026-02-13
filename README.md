@@ -11,16 +11,19 @@ This is the root directory for the MAT-CHA.AI project.
 
 ## 🚀 Latest Updates
 
-- **Shared Messaging Hub**: Real-time chat system for startups and creators to interact.
-- **Mutual Deal Confirmation**: Secure mechanism for both parties to finalize collaborations.
-- **Improved Dashboards**: Fully integrated "Messages" tab in both Startup and Creator views.
-- **Robust Field Metadata**: Matches now track collab titles and names for better historical reference.
+- **Optimistic Real-Time Chat**: Messages now appear instantly with zero lag.
+- **Auto-Sync Status**: The "Confirm Deal" status now syncs between parties in real-time without refreshing.
+- **AWS Amplify Hosting**: Fully configured for subfolder builds and SPA routing.
+- **Backend Health Check**: New `/api/health` endpoint for debugging cluster connections.
+- **New Deployment Pipeline**: AWS Amplify (Frontend) + Render (Backend) + MongoDB Atlas.
 
 ## 📖 Documentation
 
-For detailed instructions on how to install, configure, and run the application, please refer to the main documentation here:
+For detailed instructions on how to install, configure, and run the application:
 
-👉 **[Frontend/README.md](./Frontend/README.md)**
+👉 **[Frontend/README.md](./Frontend/README.md)**  
+👉 **[AMPLIFY_GUIDE.md](./AMPLIFY_GUIDE.md)** — *Primary Hosting Guide*  
+👉 **[DEPLOYMENT.md](./DEPLOYMENT.md)** — *Technical Architecture*
 
 ---
 

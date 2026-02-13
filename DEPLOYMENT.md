@@ -51,15 +51,14 @@ AWS Amplify is a powerful alternative to Vercel for hosting React apps with tigh
    - Type: `200 (Rewrite)`
 
 ## Summary
-| Component | Hosting Service | Cost |
-|-----------|----------------|------|
-| **Frontend** | AWS Amplify / Vercel | Free Tier |
-| **Backend** | Render / Railway | Free Tier |
-| **Database** | MongoDB Atlas | Free |
-| **Code** | GitHub | Free |
+| Component | Hosting Service | Technology | Cost |
+|-----------|----------------|------------|------|
+| **Frontend** | AWS Amplify | React (CRA) | Free Tier |
+| **Backend** | Render | Python (FastAPI) | Free Tier |
+| **Database** | MongoDB Atlas | NoSQL (Cloud) | Free |
 
-## GitHub Codespaces (Alternative)
-If you just want to "run" it in the cloud to show someone without setting up production servers, you can use **GitHub Codespaces**.
-1. Go to your repo on GitHub.
-2. Click `<> Code` -> `Codespaces` -> `Create codespace on main`.
-3. This gives you a full VS Code in the browser. You can run the terminals just like you do locally!
+## Technical Notes
+- **CORS**: The backend now supports dynamic `CORS_ORIGINS`. Set this to `*` in Render for initial testing.
+- **Health Check**: Use `/api/health` to verify the Backend <-> MongoDB connection.
+- **Real-Time**: Chat uses optimistic updates and background polling (3s) for a semi-real-time experience.
+- **Redirection**: AWS Amplify requires a specific Regex redirect rule for Single Page Apps (found in `AMPLIFY_GUIDE.md`).

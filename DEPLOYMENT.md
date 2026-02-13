@@ -29,21 +29,27 @@ The Python server needs to run 24/7.
 **⚠️ Important Note on Local AI**: 
 The "Local Fallback Model" `distilgpt2` requires RAM and CPU. Free tier servers (like Render's free tier) often crash if you try to load heavy AI models locally. **For cloud deployment, it is highly recommended to provide a valid `HF_TOKEN` or `OPENAI_API_KEY` so the app uses the remote API instead of trying to run `torch` on a small server.**
 
-## 3. The Frontend (Vercel)
-Vercel is excellent for React apps.
-1. Sign up for [Vercel](https://vercel.com/).
-2. "Import Project" from GitHub.
-3. Select your repository.
-4. **Root Directory**: Edit this to `Frontend/apps/frontend`.
+## 3. The Frontend (AWS Amplify)
+AWS Amplify is a powerful alternative to Vercel for hosting React apps with tight AWS integration.
+1. Sign up/Login to the [AWS Management Console](https://console.aws.amazon.com/amplify).
+2. Click **New App** > **Host web app**.
+3. Connect your GitHub repo.
+4. **App Settings**:
+   - **App Name**: `mat-cha-frontend`
+   - **Build Settings**: Amplify should auto-detect the build command (`yarn build` or `npm run build`).
+   - **Root Directory**: Ensure the build points to `Frontend/apps/frontend`.
 5. **Environment Variables**:
-   - `REACT_APP_BACKEND_URL`: The URL provided by Render (e.g., `https://mat-cha-backend.onrender.com`)
-6. Deploy!
+   - Add `REACT_APP_BACKEND_URL`: The URL provided by Render (e.g., `https://mat-cha-backend.onrender.com`).
+6. **Redirects (Important)**: In the Amplify console, go to **Rewrites and redirects** and add a rule for Single Page Apps (SPA):
+   - Source: `</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json|webp)$)([^.]+$)/>`
+   - Target: `/index.html`
+   - Type: `200 (Rewrite)`
 
 ## Summary
 | Component | Hosting Service | Cost |
 |-----------|----------------|------|
-| **Frontend** | Vercel / Netlify | Free |
-| **Backend** | Render / Railway | Free |
+| **Frontend** | AWS Amplify / Vercel | Free Tier |
+| **Backend** | Render / Railway | Free Tier |
 | **Database** | MongoDB Atlas | Free |
 | **Code** | GitHub | Free |
 

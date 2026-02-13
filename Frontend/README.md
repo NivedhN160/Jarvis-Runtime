@@ -20,7 +20,7 @@ An AI-powered matchmaking platform connecting startups with content creators for
 *   **AI Engine**: 
     *   **Primary**: Groq API (Llama-3-8b-instant) - Fast & Free
     *   **Fallback**: Hugging Face Router (Mistral-7B) / Local `distilgpt2`
-*   **Deployment**: Vercel (Frontend) + Render (Backend)
+*   **Deployment**: AWS Amplify (Frontend) + Render (Backend)
 
 ## Getting Started
 
@@ -58,7 +58,7 @@ An AI-powered matchmaking platform connecting startups with content creators for
 
 ## Deployment
 
-See [`VERCEL_GUIDE.md`](VERCEL_GUIDE.md) and [`DEPLOYMENT.md`](DEPLOYMENT.md) for detailed instructions on how to host this project for free.
+See [`AMPLIFY_GUIDE.md`](AMPLIFY_GUIDE.md) and [`DEPLOYMENT.md`](DEPLOYMENT.md) for detailed instructions on how to host this project for free.
 
 ## License
 MIT

@@ -255,10 +255,15 @@ async def delete_account(user_id: str):
 
 @api_router.delete("/collabs/{collab_id}")
 async def delete_collab_request(collab_id: str):
+    # Delete the collaboration request
     result = await db.collab_requests.delete_one({"id": collab_id})
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Collaboration request not found")
-    return {"status": "deleted"}
+    
+    # Also delete any matches associated with this collaboration request
+    await db.matches.delete_many({"collab_request_id": collab_id})
+    
+    return {"status": "deleted", "collab_id": collab_id}
 
 # --- Ephemeral Chat (48h Auto-Delete Logic) ---
 @api_router.post("/chat/messages", response_model=DirectMessage)

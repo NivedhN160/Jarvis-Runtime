@@ -115,6 +115,23 @@ const StartupDashboard = ({ user, onLogout }) => {
     }
   };
 
+  const handleDeleteCollab = async (collabId) => {
+    if (!window.confirm("Are you sure you want to delete this collaboration request? This will also remove any related matches.")) return;
+    try {
+      await axios.delete(`${API}/collabs/${collabId}`);
+      toast.success("Collaboration request deleted!");
+      loadCollabs();
+      // Clear matches if the deleted collab was the one currently selected
+      if (selectedCollab === collabId) {
+        setMatches([]);
+        setSelectedCollab(null);
+      }
+    } catch (error) {
+      console.error("Failed to delete collaboration:", error);
+      toast.error(`Deletion failed: ${error.response?.data?.detail || error.message}`);
+    }
+  };
+
   const handleDeleteAccount = async () => {
     if (!window.confirm("ARE YOU SURE? This will delete your startup account and ALL requests permanently.")) return;
     try {
@@ -401,18 +418,29 @@ const StartupDashboard = ({ user, onLogout }) => {
                           <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">{collab.content_type}</span>
                         </div>
                       </div>
-                      <Button
-                        data-testid={`find-matches-btn-${collab.id}`}
-                        onClick={() => handleGenerateMatches(collab.id)}
-                        disabled={matchLoading && selectedCollab === collab.id}
-                        className="bg-blue-600 text-white hover:bg-blue-700 h-10 px-6 rounded-full font-semibold btn-scale whitespace-nowrap"
-                      >
-                        {matchLoading && selectedCollab === collab.id ? (
-                          <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Finding...</>
-                        ) : (
-                          <><Sparkles className="h-4 w-4 mr-2" /> Find Matches</>
-                        )}
-                      </Button>
+                      <div className="flex gap-2 items-center">
+                        <Button
+                          data-testid={`find-matches-btn-${collab.id}`}
+                          onClick={() => handleGenerateMatches(collab.id)}
+                          disabled={matchLoading && selectedCollab === collab.id}
+                          className="bg-blue-600 text-white hover:bg-blue-700 h-10 px-6 rounded-full font-semibold btn-scale whitespace-nowrap"
+                        >
+                          {matchLoading && selectedCollab === collab.id ? (
+                            <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Finding...</>
+                          ) : (
+                            <><Sparkles className="h-4 w-4 mr-2" /> Find Matches</>
+                          )}
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDeleteCollab(collab.id)}
+                          className="h-10 w-10 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-full shrink-0"
+                          title="Delete Request"
+                        >
+                          <Trash2 className="h-5 w-5" />
+                        </Button>
+                      </div>
                     </div>
                   </Card>
                 ))}

@@ -151,7 +151,7 @@ const StartupDashboard = ({ user, onLogout }) => {
     <div className="min-h-screen bg-background text-foreground transition-colors duration-300" data-testid="startup-dashboard">
       {/* Navigation */}
       <nav className="glass-nav sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
-        <div className="px-6 md:px-12 lg:px-24 py-4 flex items-center justify-between">
+        <div className="px-4 md:px-12 lg:px-24 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Sparkles className="h-6 w-6 text-primary" />
             <span className="text-xl font-bold" style={{ fontFamily: 'Manrope, sans-serif' }}>MAT-CHA.AI</span>
@@ -203,7 +203,7 @@ const StartupDashboard = ({ user, onLogout }) => {
         </div>
       </nav>
 
-      <div className="px-6 md:px-12 lg:px-24 py-12">
+      <div className="px-4 md:px-12 lg:px-24 py-12">
       </div>
 
       <Tabs defaultValue="dashboard" className="w-full">

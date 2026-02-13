@@ -12,7 +12,7 @@ const LandingPage = ({ user }) => {
     <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
       {/* Glass Navigation */}
       <nav className="glass-nav fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
-        <div className="px-6 md:px-12 lg:px-24 py-4 flex items-center justify-between">
+        <div className="px-4 md:px-12 lg:px-24 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Sparkles className="h-6 w-6 text-primary" />
             <span className="text-xl font-bold" style={{ fontFamily: 'Manrope, sans-serif' }}>MAT-CHA.AI</span>
@@ -41,7 +41,7 @@ const LandingPage = ({ user }) => {
       </nav>
 
       {/* Hero Section - Tetris Grid */}
-      <div className="pt-32 pb-24 px-6 md:px-12 lg:px-24 relative z-10">
+      <div className="pt-32 pb-24 px-4 md:px-12 lg:px-24 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 fade-in">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight mb-6" style={{ fontFamily: 'Manrope, sans-serif' }}>
@@ -92,7 +92,7 @@ const LandingPage = ({ user }) => {
       </div>
 
       {/* Features - Bento Grid */}
-      <div className="py-24 px-6 md:px-12 lg:px-24 bg-card relative z-10 border-y border-border">
+      <div className="py-24 px-4 md:px-12 lg:px-24 bg-card relative z-10 border-y border-border">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4" style={{ fontFamily: 'Manrope, sans-serif' }}>How It Works</h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">AI-driven insights to match the right talent with the right opportunity</p>
@@ -126,7 +126,7 @@ const LandingPage = ({ user }) => {
       </div>
 
       {/* Stats Section */}
-      <div className="py-24 px-6 md:px-12 lg:px-24 relative z-10">
+      <div className="py-24 px-4 md:px-12 lg:px-24 relative z-10">
         <div className="bg-primary rounded-3xl p-12 md:p-16 text-primary-foreground shadow-2xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
@@ -150,7 +150,7 @@ const LandingPage = ({ user }) => {
       </div>
 
       {/* CTA Section */}
-      <div className="py-24 px-6 md:px-12 lg:px-24 bg-card relative z-10 border-t border-border">
+      <div className="py-24 px-4 md:px-12 lg:px-24 bg-card relative z-10 border-t border-border">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6" style={{ fontFamily: 'Manrope, sans-serif' }}>Ready to Find Your Perfect Match?</h2>
           <p className="text-lg md:text-xl text-muted-foreground mb-8">Join hundreds of brands and creators building successful collaborations</p>
@@ -165,7 +165,7 @@ const LandingPage = ({ user }) => {
       </div>
 
       {/* Footer */}
-      <footer className="py-12 px-6 md:px-12 lg:px-24 border-t border-border relative z-10 bg-muted/30">
+      <footer className="py-12 px-4 md:px-12 lg:px-24 border-t border-border relative z-10 bg-muted/30">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-primary" />

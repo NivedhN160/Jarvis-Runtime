@@ -60,5 +60,7 @@ AWS Amplify is a powerful alternative to Vercel for hosting React apps with tigh
 ## Technical Notes
 - **CORS**: The backend now supports dynamic `CORS_ORIGINS`. Set this to `*` in Render for initial testing.
 - **Health Check**: Use `/api/health` to verify the Backend <-> MongoDB connection.
-- **Real-Time**: Chat uses optimistic updates and background polling (3s) for a semi-real-time experience.
+- **Real-Time**: Chat uses optimistic updates and background polling (3s).
+- **Ephemeral Messaging**: Messages are stored with a 48h TTL logic in the backend for privacy and performance.
+- **External Recommendations**: The system can suggest creators from the global AI knowledge base via `/api/ai/external-suggestions`.
 - **Redirection**: AWS Amplify requires a specific Regex redirect rule for Single Page Apps (found in `AMPLIFY_GUIDE.md`).

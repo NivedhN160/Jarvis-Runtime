@@ -2,15 +2,15 @@
 
 An AI-powered matchmaking platform connecting startups with content creators for impactful social media campaigns.
 
-## Key Features
+## 🌟 Key Features
 
-1.  **AI Matchmaking**: Intelligent algorithm matches startups with creators based on niche, platform, budget, and content style.
-2.  **AI Writer & Chatbot**: Built-in AI assistant ("Writer Mode") to help create scripts and captions instantly.
-3.  **Real-Time Chat Hub**: Optimized messaging with **Optimistic UI** (messages appear instantly) and background polling.
-4.  **Mutual Confirmation**: A formal "Confirm Deal" mechanism that syncs in real-time across both user dashboards.
-5.  **Health-Checked Architecture**: Integrated backend monitoring to ensure MongoDB and AI services are always online.
-6.  **Secure Authentication**: Role-based access for Startups and Creators with password hashing (Bcrypt).
-7.  **Cloud Native Deployment**: Pre-configured for **AWS Amplify** and **Render**.
+1.  **AI Matchmaking (Match Score)**: Intelligent algorithm using **Vector Search** (ChromaDB) to match startups with creators. Provides a 0-100 score and qualitative analysis explaining *why* a pair is compatible.
+2.  **AI Writer & Script Assistant**: Built-in "Writer Mode" helping founders create scripts, captions, and descriptions instantly using Llama-3.
+3.  **Real-Time Chat Hub**: Semi-persistent messaging with **Optimistic UI** (instant feedback) and local state syncing.
+4.  **48h Ephemeral Messaging**: Messages automatically expire after 48 hours, ensuring a high-performance, secure communication environment.
+5.  **Mutual Deal Confirmation**: A formal multi-step agreement workflow that syncs state across both user dashboards in real-time.
+6.  **Hybrid AI Backend**: Dynamic routing between **Groq** (primary), **Hugging Face** (fallback), and a **Local Torch Pipeline** (offline fallback).
+7.  **Cloud Native Design**: Fully optimized for **AWS Amplify** and **Render** with dynamic CORS and healthy endpoint monitoring.
 
 ## Tech Stack
 

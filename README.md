@@ -19,11 +19,13 @@ This is the root directory for the MAT-CHA.AI project.
 
 ## 📖 Documentation
 
-For detailed instructions on how to install, configure, and run the application:
+For detailed technical and architectural information:
 
-👉 **[Frontend/README.md](./Frontend/README.md)**  
+👉 **[REQUIREMENTS.md](./REQUIREMENTS.md)** — *Functional & Technical Specs*  
+👉 **[DESIGN.md](./DESIGN.md)** — *Architecture & Data Schema*  
+👉 **[Frontend/README.md](./Frontend/README.md)** — *App Features & Setup*  
 👉 **[AMPLIFY_GUIDE.md](./AMPLIFY_GUIDE.md)** — *Primary Hosting Guide*  
-👉 **[DEPLOYMENT.md](./DEPLOYMENT.md)** — *Technical Architecture*
+👉 **[DEPLOYMENT.md](./DEPLOYMENT.md)** — *Technical Architecture Overview*
 
 ---
 

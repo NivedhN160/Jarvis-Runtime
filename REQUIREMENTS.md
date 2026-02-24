@@ -1,56 +1,45 @@
 # Project Requirements - MAT-CHA.AI
 
-## 1. Overview
-MAT-CHA.AI is an AI-powered matchmaking platform designed to bridge the gap between startups and content creators. The primary goal is to facilitate high-quality, data-driven collaborations through intelligent analysis and seamless communication.
+## 1. Problem Statement
+The Indian digital ecosystem is witnessing a simultaneous surge in D2C startups and the "Creator Economy" (80M+ creators). However, small-to-medium startups face three critical friction points:
+1. **The Discovery Gap**: Finding creators who truly vibe with a brand niche is time-consuming and manual.
+2. **High Agency Costs**: Traditional influencer agencies are too expensive for early-stage startups.
+3. **Ghosting & Trust**: Lack of structured collaboration workflows leads to unfulfilled deals and lack of accountability.
 
-## 2. Functional Requirements
+## 2. Proposed AI-Powered Solution
+**MAT-CHA.AI** (Match + Chat) is a spec-driven matchmaking platform that uses Generative AI to bridge this gap. By analyzing creator portfolios and startup requirements semantically, we provide:
+- **Semantic Vibe-Matching**: Matching beyond keywords, focusing on content tone and audience alignment.
+- **Predictive ROI Analysis**: AI-generated reasoning for why a specific creator is a good match.
+- **Structured Workflows**: A built-in "Deal Confirmation" mechanism and AI-assisted scriptwriting to ensure professional delivery.
 
-### 2.1 User Roles & Authentication
-- **Startup/Brand**: Can post collaboration requests, search for creators, and manage deals.
-- **Creator**: Can create profiles, showcase portfolios, and express interest in collaborations.
-- **Authentication**: Secure login/signup using email and password (hashed with Bcrypt).
+## 3. Unique Selling Proposition (USP)
+- **Semantic "Vibe" Search**: Unlike filter-based tools, Mat-Cha uses vector embeddings to find creators based on the *essence* of their content.
+- **Ephemeral Secure Chat**: A 48-hour auto-delete chat window that forces quick decision-making and keeps the platform lightweight.
+- **Mutual Deal Confirmation**: A formal multi-sig style agreement within the app to reduce ghosting.
 
-### 2.2 Collaboration Management
-- **Request Creation**: Startups can define title, description, budget, platform (Instagram/YouTube), and content type.
-- **Profile Creation**: Creators can define bio, platforms, content types, and provide social media stats (followers, subscribers, engagement).
-- **Deletion**: Users can delete their accounts or individual collaboration requests.
+## 4. Hackathon Track Alignment
+- **Primary Track**: **AI for Media, Content & Digital Experiences**
+- **Secondary Track**: **AI for Retail, Commerce & Market Intelligence**
+- **Implementation**: Leveraging AWS Generative AI services to revolutionize how marketing content is initiated and managed in the digital-first Indian market.
 
-### 2.3 AI-Powered Features
-- **Semantic Matchmaking**: Use vector embeddings to match startups with creators based on niche and description.
-- **Match Analysis**: Provide a score (0-100) and a qualitative explanation for every pairing.
-- **AI Writer Mode**: Help users generate scripts, captions, and collaboration descriptions.
-- **External Recommendations**: Suggest real-world influencers based on the campaign niche.
+## 5. Why it Matters for India
+India has one of the world's most vibrant and fastest-growing creator economies. By democratizing access to professional collaborations, MAT-CHA.AI:
+- **Empowers "Bharat" Brands**: Allows small D2C brands from Tier 2/3 cities to find relevant local creators.
+- **Monetizes Micro-Influencers**: Helps talented creators who aren't yet on agency rosters to find paid opportunities.
+- **Boosts Digital Literacy**: Simplifies the professionalization of content creator-business relationships.
 
-### 2.4 Communication
-- **Real-Time Chat**: Direct messaging between matched parties with optimistic updates.
-- **Ephemeral Messaging**: Messages automatically expire after 48 hours to maintain a lightweight and secure database.
-- **Deal Confirmation**: A formal mechanism where both parties must "Confirm Deal" for a collaborative agreement.
+## 6. Functional Requirements
+- **Startup/Brand**: Post collaboration requests, search for creators, and manage deals.
+- **Creator**: Build AI-indexed profiles, showcase portfolios, and express interest.
+- **AI Matching**: Vector-based semantic search with qualitative analysis (Score 0-100).
+- **Communication**: Real-time messaging with 48h TTL (Time-To-Live).
+- **Deal Confirmation**: Both parties must accept the collaboration terms via a shared "Confirm Deal" action.
 
-## 3. Technical Requirements
+## 7. Technical Requirements & Tech Stack
+- **Frontend**: React.js with Tailwind CSS & Framer Motion (Deployed on **AWS Amplify**).
+- **Backend**: FastAPI (Python) for high-performance async execution.
+- **Database**: **MongoDB Atlas** (Hosted on AWS) for structured data.
+- **Vector Store**: **ChromaDB** for semantic indexing.
+- **AI/LLM**: **Amazon Bedrock** (Anthropic Claude/Llama 3) for matching and content generation.
+- **Hosting**: AWS Amplify (CDN/Frontend) and AWS App Runner/Lambda (Backend).
 
-### 3.1 Frontend
-- **Framework**: React.js
-- **Styling**: Tailwind CSS & Shadcn/UI for a premium, modern interface.
-- **State Management**: React Hooks and Context for real-time responsiveness.
-- **Animations**: Framer Motion / CSS Transitions for smooth interactions (particles, carousels).
-
-### 3.2 Backend
-- **Language**: Python 3.8+
-- **Framework**: FastAPI (for high-performance asynchronous execution).
-- **Communication Protocol**: REST API with background polling for chat (3s interval).
-
-### 3.3 Database & Storage
-- **Primary DB**: MongoDB Atlas (NoSQL) for user profiles and chat history.
-- **Vector DB**: ChromaDB for storing and searching semantic embeddings of creator profiles.
-- **Caching**: Local memory/Background tasks for high-performance matching.
-
-### 3.4 AI Integration
-- **Primary LLM**: Groq (Llama-3-8b-instant) for low-latency matching and generation.
-- **Fallback LLM**: Hugging Face API (Mistral-7B).
-- **Local Fallback**: `distilgpt2` for offline/low-resource environments.
-
-## 4. Non-Functional Requirements
-- **Scalability**: Deployable via AWS Amplify (Frontend) and Render (Backend).
-- **Responsiveness**: Mobile-first design for the dashboard and landing pages.
-- **Security**: Environment variable protection for all API keys and DB strings.
-- **Performance**: Match results should be generated in under 5 seconds.

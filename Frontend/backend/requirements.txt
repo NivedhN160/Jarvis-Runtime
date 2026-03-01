@@ -29,7 +29,6 @@ colorama==0.4.6
 comtypes==1.4.12
 cryptography==46.0.4
 dataclasses-json==0.6.7
-datasets==4.0.0
 ddgs==9.5.5
 deepface==0.0.96
 dill==0.3.8
@@ -53,7 +52,6 @@ Flask==3.1.2
 flask-cors==6.0.2
 flatbuffers==25.9.23
 frozenlist==1.8.0
-fsspec==2026.1.0
 gast==0.7.0
 gdown==5.2.0
 git-filter-repo==2.47.0

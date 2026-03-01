@@ -19,7 +19,7 @@ class VectorStore:
 
         # AI Configuration
         # 1. Try to detect key type from environment or fallback
-        FALLBACK_KEY = "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"
+        FALLBACK_KEY = ""
         
         hf_token = os.environ.get("HF_TOKEN")
         openai_key = os.environ.get("OPENAI_API_KEY")

@@ -20,7 +20,7 @@ env_path = Path("Frontend/backend/.env")
 load_dotenv(dotenv_path=env_path, override=True)
 
 # AI Setup (Automatic detection)
-FALLBACK_KEY = "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"
+FALLBACK_KEY = ""
 HF_TOKEN = os.environ.get("HF_TOKEN")
 OPENAI_KEY = os.environ.get("OPENAI_API_KEY")
 

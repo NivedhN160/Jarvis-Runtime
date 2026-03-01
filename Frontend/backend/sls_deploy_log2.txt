@@ -1,0 +1,15 @@
+
+Deploying mat-cha-backend to stage dev (us-east-1)
+
+├ù Stack mat-cha-backend-dev failed to deploy (894s)
+Environment: win32, node 24.13.0, framework 3.40.0, plugin 7.2.3, SDK 4.5.1
+Credentials: Local, "default" profile
+Docs:        docs.serverless.com
+Support:     forum.serverless.com
+Bugs:        github.com/serverless/serverless/issues
+
+Error:
+CREATE_FAILED: ApiLambdaFunction (AWS::Lambda::Function)
+Resource handler returned message: "Unzipped size must be smaller than 262144000 bytes (Service: Lambda, Status Code: 400, Request ID: 81f88d6c-6604-4f19-a420-4ca504bd17b3) (SDK Attempt Count: 1)" (RequestToken: 8d59ac07-c220-1c3d-3df6-a845214b1fa3, HandlerErrorCode: InvalidRequest)
+
+View the full error: https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stack/detail?stackId=arn%3Aaws%3Acloudformation%3Aus-east-1%3A876253813850%3Astack%2Fmat-cha-backend-dev%2Fe8ae5200-1563-11f1-94b4-0affea5597d7

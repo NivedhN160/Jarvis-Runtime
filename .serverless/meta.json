@@ -1,0 +1,22 @@
+{
+  "unknown": {
+    "versionFramework": "4.33.0",
+    "error": {
+      "message": "Configuration file not found",
+      "stack": "Error: Configuration file not found\n    at _CoreRunner.run (file:///C:/Users/nived/.serverless/releases/4.33.0/package/dist/sf-core.js:1453:18014)\n    at route (file:///C:/Users/nived/.serverless/releases/4.33.0/package/dist/sf-core.js:2519:2861)\n    at async Object.run (file:///C:/Users/nived/.serverless/releases/4.33.0/package/dist/sf-core.js:2520:3886)\n    at async run2 (file:///C:/Users/nived/.serverless/releases/4.33.0/package/dist/sf-core.js:2520:5040)",
+      "code": "CONFIG_FILE_NOT_FOUND"
+    },
+    "command": [
+      "plugin",
+      "install"
+    ],
+    "options": {
+      "n": "serverless-python-requirements"
+    },
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  }
+}

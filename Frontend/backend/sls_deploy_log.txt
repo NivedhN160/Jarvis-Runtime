@@ -1,0 +1,23 @@
+
+Warning: Invalid configuration encountered
+  at 'provider.runtime': must be equal to one of the allowed values [dotnet6, go1.x, java21, java17, java11, java8, java8.al2, nodejs14.x, nodejs16.x, nodejs18.x, nodejs20.x, provided, provided.al2, provided.al2023, python3.7, python3.8, python3.9, python3.10, python3.11, ruby2.7, ruby3.2]
+
+Learn more about configuration validation here: http://slss.io/configuration-validation
+
+Deploying mat-cha-backend to stage dev (us-east-1)
+
+├ù Stack mat-cha-backend-dev failed to deploy (0s)
+Environment: win32, node 24.13.0, framework 3.40.0, plugin 7.2.3, SDK 4.5.1
+Credentials: Local, "default" profile
+Docs:        docs.serverless.com
+Support:     forum.serverless.com
+Bugs:        github.com/serverless/serverless/issues
+
+Error:
+Error: spawn docker ENOENT
+    at notFoundError (E:\College\Sem 4\Jarvis-Runtime\Frontend\backend\node_modules\cross-spawn\lib\enoent.js:6:26)
+    at verifyENOENT (E:\College\Sem 4\Jarvis-Runtime\Frontend\backend\node_modules\cross-spawn\lib\enoent.js:40:16)
+    at cp.emit (E:\College\Sem 4\Jarvis-Runtime\Frontend\backend\node_modules\cross-spawn\lib\enoent.js:27:25)
+    at ChildProcess._handle.onexit (node:internal/child_process:294:12)
+
+1 deprecation found: run 'serverless doctor' for more details

@@ -69,21 +69,10 @@ class VectorStore:
             self._init_local_pipeline()
 
     def _init_local_pipeline(self):
-        try:
-            from transformers import pipeline
-            # Using distilgpt2 for speed/size. User can swap for 'gpt2-medium' or better if they have resources.
-            self.local_generator = pipeline('text-generation', model='distilgpt2') 
-            self.use_local_pipeline = True
-            self.client = None
-            self.async_client = None
-            print("VectorStore: Local pipeline initialized successfully.")
-        except ImportError:
-            print("VectorStore: ERROR - transformers or torch not installed. Please run `pip install transformers torch`.")
-            self.use_local_pipeline = False # Cannot use local either
-            # We don't set client to None here if it was already set (in case this is called as fallback)
-        except Exception as e:
-            print(f"VectorStore: Error initializing local pipeline: {e}")
-            self.use_local_pipeline = False
+        print("VectorStore: Local pipeline disabled for Cloud Deployment to save RAM.")
+        self.use_local_pipeline = False
+        self.client = None
+        self.async_client = None
 
     def ensure_local_pipeline(self):
         if not self.use_local_pipeline:

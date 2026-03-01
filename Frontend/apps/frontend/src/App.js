@@ -16,6 +16,12 @@ function App() {
   const [isChatOpen, setIsChatOpen] = React.useState(false);
 
   React.useEffect(() => {
+    // Silent ping to wake up backend (e.g., on Render)
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
+    fetch(`${backendUrl}/api/health`)
+      .then(() => document.body.setAttribute('data-backend-status', 'awake'))
+      .catch(() => console.log("Backend warming up..."));
+
     const savedUser = localStorage.getItem('user');
     if (savedUser) {
       setUser(JSON.parse(savedUser));
